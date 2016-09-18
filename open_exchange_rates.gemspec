@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
   gem.version       = OpenExchangeRates::VERSION
   gem.license       = "MIT"
 
-  gem.add_dependency('yajl-ruby')
+  gem.add_dependency('json')
 
   gem.add_development_dependency('rr')
   gem.add_development_dependency('rake')

@@ -1,5 +1,6 @@
 require "open-uri"
 require "date"
+require "json"
 
 module OpenExchangeRates
   class Rates
@@ -90,13 +91,17 @@ module OpenExchangeRates
     end
 
     def parse_latest
-      @latest_parser ||= OpenExchangeRates::Parser.new
-      @latest_parser.parse(open("#{OpenExchangeRates::LATEST_URL}?app_id=#{@app_id}"))
+      @latest_parser ||= OpenExchangeRates::Parser.new(
+        open("#{OpenExchangeRates::LATEST_URL}?app_id=#{@app_id}").read
+      )
+      @latest_parser.parse
     end
 
     def parse_on(date_string)
-      @on_parser = OpenExchangeRates::Parser.new
-      @on_parser.parse(open("#{OpenExchangeRates::BASE_URL}/historical/#{date_string}.json?app_id=#{@app_id}"))
+      @on_parser = OpenExchangeRates::Parser.new(
+        open("#{OpenExchangeRates::BASE_URL}/historical/#{date_string}.json?app_id=#{@app_id}").read
+      )
+      @on_parser.parse
     end
 
   end

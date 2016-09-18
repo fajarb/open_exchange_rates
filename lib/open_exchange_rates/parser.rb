@@ -1,6 +1,6 @@
-require "yajl"
+require "json"
 
 module OpenExchangeRates
-  class Parser < Yajl::Parser
+  class Parser < JSON::Parser
   end
 end
